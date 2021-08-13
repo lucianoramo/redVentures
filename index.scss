@@ -1,0 +1,523 @@
+/* RESET
+*/
+/////////////////////////
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+//* FIM RESET
+
+////VARIÄVEIS
+
+:root{
+    --dark-green: #15573F;
+    --light-orange: #FD9872;
+    --light-green: #75BC97;
+
+}
+
+// TIPOGRAFIA //
+h1 {
+    font-size: 70px;
+    line-height: 85px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 55px;
+    line-height: 67px;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 35px;
+    line-height: 37px;
+    font-weight: 700;
+}
+
+h4 {
+    font-size: 16px;
+    line-height: 28px;
+    font-weight: 700;
+}
+
+p {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 300;
+}
+
+strong {
+    font-weight: 700;
+}
+
+////FIM TIPOGRAFIA
+
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #f2f2f2;
+}
+
+.container {
+    margin: 0px auto;
+    max-width: 900px
+}
+
+/////HEADER/////////////
+.destacada {
+    background-color: var(--light-green);
+    height: 500px;
+    background-image: url('./images/hero/desktop/plantperson.png');
+    background-position: 70% center;
+    background-size: auto 400px;
+    background-repeat: no-repeat;
+    width: 100hv;
+}
+
+.destacada-left {
+    width: inherit;
+    height: inherit;
+    background-image: url('./images/hero/desktop/left-leaves.png');
+    background-position: left;
+    background-size: auto 500px;
+    background-repeat: no-repeat;
+    z-index: 99;
+}
+
+.destacada-right {
+    width: inherit;
+    height: inherit;
+    background-image: url('./images/hero/desktop/right-leaves.png');
+    background-position: right;
+    background-size: auto 500px;
+    background-repeat: no-repeat;
+    z-index: 999;
+}
+
+.container.hero {
+    height: inherit;
+    z-index: 9999;
+}
+
+.hero-logo {
+    margin-top: 50px
+}
+
+.hero-text {
+    margin-top: 50px;
+    width: 400px;
+    color: #fff;
+}
+
+.hero-arrow {
+    margin-top: 5px;
+}
+
+////FIM HEADER
+
+///ESCOLHAS 
+#escolhas-section {
+    background-color: #fff;
+
+}
+
+.escolhas {
+    width: inherit;
+    padding-top: 50px;
+    display: flex;
+    align-items: space-around;
+}
+
+.escolha-block {
+    background-color: #fff;
+    padding: 25px;
+    width: 250px;
+    margin: 0 25px 0 0
+}
+
+.escolha-block img {
+    height: 75px
+}
+
+.escolha-block p {
+    margin-top: 10px;
+    color: #848484
+}
+
+.select {
+    margin-top: 20px;
+}
+
+/// FIM ESCOLHAS
+
+////SELECTS
+.custom-select-wrapper {
+    position: relative;
+    user-select: none;
+    width: 100%;
+
+}
+
+.custom-select {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    // border-width: 0 2px 0 2px;
+    // border-style: solid;
+    // border-color: #394a6d;
+    // border-radius: 19px;
+
+
+}
+
+.custom-select__trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #3b3b3b;
+    height: 40px;
+    line-height: 40px;
+    //background: #ffffff;
+    cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #A8A8A8;
+    border-radius: 19px;
+}
+
+.custom-options {
+    position: absolute;
+    display: block;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 1px solid #A8A8A8;
+    border-top: 0;
+    background: #fff;
+    transition: all 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.custom-select.open .custom-options {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+
+}
+
+.custom-select.open {
+    border-top-left-radius: 19px;
+    border-top-right-radius: 19px;
+
+}
+
+.custom-options {
+    border-bottom-left-radius: 19px;
+    border-bottom-right-radius: 19px;
+}
+
+.custom-option {
+    position: relative;
+    display: block;
+    padding: 0 22px 0 22px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #3b3b3b;
+    line-height: 40px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.custom-option:hover {
+    cursor: pointer;
+    background-color:var(--light-green);
+}
+
+.custom-option.selected {
+    color: #ffffff;
+    background-color:var(--light-green);
+}
+
+.arrow {
+    position: relative;
+    height: 15px;
+    width: 15px;
+}
+
+.arrow::before,
+.arrow::after {
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    width: 0.15rem;
+    height: 100%;
+    transition: all 0.5s;
+}
+
+.arrow::before {
+    left: -5px;
+    transform: rotate(45deg);
+    background-color: #A8A8A8;
+}
+
+.arrow::after {
+    left: 5px;
+    transform: rotate(-45deg);
+    background-color: #A8A8A8;
+}
+
+.open .arrow::before {
+    left: -5px;
+    transform: rotate(-45deg);
+}
+
+.open .arrow::after {
+    left: 5px;
+    transform: rotate(45deg);
+}
+
+/////FIM SELECTS
+
+/////GALERIA DE PLANTAS
+.picks {
+    margin-top: 25px;
+}
+
+.picks img {
+    width: 148px;
+    margin-bottom: 20px;
+}
+
+.picks h2 {
+    color: var(--dark-green);
+    margin-bottom: 54px;
+}
+
+.planta-footer{
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.planta-preco{
+    color: var(--dark-green);
+}
+.planta-icones{
+    
+    display: flex;
+}
+.planta-icone{
+    margin-left: 5px;
+    width: auto;
+    height: 20px
+}
+
+.grid {
+    display: grid;
+    //flex-flow: row wrap;
+    margin-left: -8px;
+    /* Adjustment for the gutter */
+    width: 100%;
+}
+
+.grid-template-rows-4 {
+    grid-template-columns: 412px 206px 206px;
+    grid-template-rows: 490px auto 245px;
+    column-gap: 25px;
+    row-gap: 25px;
+}
+
+.item {
+    background-color: #fff;
+    //flex: auto;
+   // height: 245px;
+    width: 206px;
+   // margin: 0 25px 25px 0;
+    /* Some gutter */
+    padding: 25px;
+}
+
+.masonry-brick:nth-child(1) {
+    width: 412px;
+    height: 490px;
+}
+
+.imgGrid {
+    text-align: center;
+    height: 140px;
+    margin-bottom: 25px;
+    ;
+}
+
+.imgGrid img {
+    height: 100%;
+}
+
+/////SECTION NO results
+
+#no-results {
+    margin-top: 50px;
+
+}
+
+#no-results .container {
+    display: flex;
+}
+
+.no-results-left {
+    margin-right: 100px;
+}
+
+#no-results h2 {
+    font-size: 45px;
+    color: #a9a9a9
+}
+
+#no-results p {
+    color: #a9a9a9
+}
+
+#no-results .texto {
+    width: 210px
+}
+
+/////FIM SECTION NO results
+
+/////RESULTADOS

@@ -1,0 +1,19 @@
+{
+  "name": "front-end-test-2",
+  "version": "1.0.0",
+  "description": "Simple Parcel Sandbox",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html --open"
+  },
+  "dependencies": {
+    "parcel": "1.12.3"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.6.1",
+    "sass": "^1.37.5"
+  },
+  "keywords": [],
+  "author": "Luciano Ramo - Gazai",
+  "license": "ISC"
+}
