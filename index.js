@@ -5,7 +5,7 @@ import 'regenerator-runtime/runtime'
 const API_BASE_URL = `https://front-br-challenges.web.app/api/v2/green-thumb/?`
 
 //Busca os dados na API conforme escolhas do usuário
-async function fetchApi(sun, water, pets) { 
+async function fetchApi(sun, water, pets) {
     //handle status 404
     handleLoading('start')
     let response = await fetch(`${API_BASE_URL}sun=${sun}&water=${water}&pets=${pets}`);
@@ -24,9 +24,10 @@ async function fetchApi(sun, water, pets) {
 const handleLoading = (modo) => {
     const loadingDiv = document.getElementById('loading')
     const noResultsDiv = document.getElementById('no-results')
-
+    const results = document.getElementById('results')
     switch (modo) {
         case 'start':
+            results.style.display = 'block'
             loadingDiv.style.display = 'block'
             noResultsDiv.style.display = 'none'
             break
@@ -35,6 +36,7 @@ const handleLoading = (modo) => {
             noResultsDiv.style.display = 'none'
             break
         case 'no-results':
+            results.style.display = 'none'
             loading.style.display = 'none'
             noResultsDiv.style.display = 'block'
             break
@@ -45,10 +47,11 @@ const handleLoading = (modo) => {
 }
 
 const writeData = (plants) => {
-    
+
     handleLoading('finished')
     const container = document.getElementById('div-results')
-    container.innerHTML = `<div id="loading" style="display:none;">Loading...</div>`
+    container.innerHTML = `<div id="loading" style="display:none;"><div class="lds-ellipsis">
+    <div></div><div></div><div></div><div></div></div></div>`
     plants.map((plant, id) => {
         var template = document.createElement('template');
         if (id === 0) {
@@ -56,21 +59,27 @@ const writeData = (plants) => {
             <div class="item item-${id + 1}">
                 <div class="staff-favorite"><p>Staff Favorite</p></div>
                 <div class="imgGrid"><img src="${plant.url}"></div>
-                <h4>${plant.name}</h4>
-                <div class="planta-footer">
-                    <div class="planta-preco">
-                        <h4>$${plant.price}</h4>
+                <div class="fav-planta-footer">
+                    <div class="fav-planta-name">    
+                        <h4>${plant.name}</h4>
                     </div>
-                    <div class="planta-icones">
-                        <div class="planta-icone sun"><img src="./images/icons/low-sun.svg" alt=""></div>
-                        <div class="planta-icone water"><img src="./images/icons/3-drops.svg" alt=""></div>
-                        <div class="planta-icone pets"><img src="./images/icons/pet.svg" alt=""></div>
+                    <div class="fav-preco-icone">
+                        <div class="planta-preco">
+                            <h4>$${plant.price}</h4>
+                        </div>
+                        <div class="planta-icones">
+                            <div class="planta-icone sun"><img src="./images/icons/low-sun.svg" alt=""></div>
+                            <div class="planta-icone water"><img src="./images/icons/3-drops.svg" alt=""></div>
+                            <div class="planta-icone pets"><img src="./images/icons/pet.svg" alt=""></div>
+                        </div>
                     </div>
+                    
                 </div>
-                </div>`.trim()
+            </div>`.trim()
             container.appendChild(template.content.firstChild)
         } else {
-            template.innerHTML = `<div class="item item-${id + 1}">
+            template.innerHTML = `
+            <div class="item item-${id + 1}">
                 <div class="imgGrid"><img src="${plant.url}"></div>
                 <h4>${plant.name}</h4>
                 <div class="planta-footer">
@@ -83,7 +92,7 @@ const writeData = (plants) => {
                         <div class="planta-icone pets"><img src="./images/icons/pet.svg" alt=""></div>
                     </div>
                 </div>
-                </div>`.trim()
+            </div>`.trim()
             container.appendChild(template.content.firstChild)
         }
     })
@@ -92,7 +101,7 @@ const writeData = (plants) => {
 
 const cleanResults = () => {
     const container = document.getElementById('div-results')
-    container.innerHTML = `<div id="loading" style="display:none;">Loading...</div>`
+    container.innerHTML = `<div id="loading" style="display:none;"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>`
     console.log("clean")
 }
 let selectStatus = {
@@ -105,7 +114,7 @@ const checkSelectStatus = () => {
         console.log(`rodar funcao: ${selectStatus.sun} ${selectStatus.water} ${selectStatus.pets}`)
         cleanResults()
         fetchApi(selectStatus.sun, selectStatus.water, selectStatus.pets)
-        
+
     } else {
         console.log("nada")
 
@@ -117,13 +126,13 @@ const checkSelectStatus = () => {
 */
 
 
-for (const select of document.querySelectorAll('.custom-select-wrapper')){
-   // console.log(select)
+for (const select of document.querySelectorAll('.custom-select-wrapper')) {
+    // console.log(select)
     select.addEventListener('click', function () {
 
         this.querySelector('.custom-select').classList.toggle('open');
         this.querySelector('.custom-select__trigger').classList.toggle('trigger_open')
-       
+
     })
 }
 
