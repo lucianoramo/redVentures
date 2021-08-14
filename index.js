@@ -5,7 +5,8 @@ import 'regenerator-runtime/runtime'
 const API_BASE_URL = `https://front-br-challenges.web.app/api/v2/green-thumb/?`
 
 //Busca os dados na API conforme escolhas do usuário
-async function fetchApi(sun, water, pets) { //handle status 404
+async function fetchApi(sun, water, pets) { 
+    //handle status 404
     handleLoading('start')
     let response = await fetch(`${API_BASE_URL}sun=${sun}&water=${water}&pets=${pets}`);
     if (response.status === 200) {
@@ -14,6 +15,7 @@ async function fetchApi(sun, water, pets) { //handle status 404
         await writeData(data)
     } else {
         console.log("sem resultados para essa combinação")
+        handleLoading('no-results')
         cleanResults()
 
     }
@@ -43,9 +45,10 @@ const handleLoading = (modo) => {
 }
 
 const writeData = (plants) => {
+    
     handleLoading('finished')
     const container = document.getElementById('div-results')
-    container.innerHTML = ""
+    container.innerHTML = `<div id="loading" style="display:none;">Loading...</div>`
     plants.map((plant, id) => {
         var template = document.createElement('template');
         if (id === 0) {
@@ -88,8 +91,8 @@ const writeData = (plants) => {
 
 const cleanResults = () => {
     const container = document.getElementById('div-results')
-    container.innerHTML = ""
-
+    container.innerHTML = `<div id="loading" style="display:none;">Loading...</div>`
+    console.log("clean")
 }
 let selectStatus = {
     sun: "",
@@ -99,6 +102,7 @@ let selectStatus = {
 const checkSelectStatus = () => {
     if (selectStatus.sun !== "" && selectStatus.water !== "" && selectStatus.pets !== "") {
         console.log(`rodar funcao: ${selectStatus.sun} ${selectStatus.water} ${selectStatus.pets}`)
+        cleanResults()
         fetchApi(selectStatus.sun, selectStatus.water, selectStatus.pets)
         
     } else {
