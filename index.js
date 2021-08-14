@@ -1,4 +1,4 @@
-//inserido para evitar um erro no uso de async / await relacionado ao Babel
+// ! inserido para evitar um erro no uso de async / await relacionado ao Babel local
 import 'regenerator-runtime/runtime'
 
 //URL base da API
@@ -6,6 +6,7 @@ const API_BASE_URL = `https://front-br-challenges.web.app/api/v2/green-thumb/?`
 
 //Busca os dados na API conforme escolhas do usuário
 async function fetchApi(sun, water, pets) { //handle status 404
+    handleLoading('start')
     let response = await fetch(`${API_BASE_URL}sun=${sun}&water=${water}&pets=${pets}`);
     if (response.status === 200) {
         let data = await response.json();
@@ -14,17 +15,35 @@ async function fetchApi(sun, water, pets) { //handle status 404
     } else {
         console.log("sem resultados para essa combinação")
         cleanResults()
+
     }
 }
 
-const writeData2 = (plants) => {
-    const container = document.getElementById('div-results')
-    container.innerHTML = '<div class="grid grid-template-rows-4">' + plants.map((plant) => {
-        return '<div class="item"> <div class="imgGrid"><img src="' + plant.url + '"></img></div>' + '<h4>' + plant.name + '</h4></div>'
-    }).join('') + '</div>'
+const handleLoading = (modo) => {
+    const loadingDiv = document.getElementById('loading')
+    const noResultsDiv = document.getElementById('no-results')
+
+    switch (modo) {
+        case 'start':
+            loadingDiv.style.display = 'block'
+            noResultsDiv.style.display = 'none'
+            break
+        case 'finished':
+            loading.style.display = 'none'
+            noResultsDiv.style.display = 'none'
+            break
+        case 'no-results':
+            loading.style.display = 'none'
+            noResultsDiv.style.display = 'block'
+            break
+        default:
+            break;
+    }
+
 }
 
 const writeData = (plants) => {
+    handleLoading('finished')
     const container = document.getElementById('div-results')
     container.innerHTML = ""
     plants.map((plant, id) => {
@@ -70,6 +89,7 @@ const writeData = (plants) => {
 const cleanResults = () => {
     const container = document.getElementById('div-results')
     container.innerHTML = ""
+
 }
 let selectStatus = {
     sun: "",
@@ -80,47 +100,17 @@ const checkSelectStatus = () => {
     if (selectStatus.sun !== "" && selectStatus.water !== "" && selectStatus.pets !== "") {
         console.log(`rodar funcao: ${selectStatus.sun} ${selectStatus.water} ${selectStatus.pets}`)
         fetchApi(selectStatus.sun, selectStatus.water, selectStatus.pets)
+        
     } else {
         console.log("nada")
 
     }
 
 }
-//Capturando o evento de escolha do usuário
-const handleSunSelect = (el) => {
-    const val = el.target.value
-    selectStatus.sun = val
-    //console.log(selectStatus)
-    checkSelectStatus()
+/****************************************************************
+ Tratamento das caixas de escolha e disparo da funçao de consulta a API
+*/
 
-}
-const sunSelect = document.getElementById('sunSelector');
-sunSelect.addEventListener('change', handleSunSelect, false)
-
-
-const handleWaterSelect = (el) => {
-    const val = el.target.value
-    selectStatus.water = val
-    //console.log(selectStatus)
-    checkSelectStatus()
-
-}
-const waterSelect = document.getElementById('waterSelector');
-waterSelect.addEventListener('change', handleWaterSelect, false)
-
-const handlePetsSelect = (el) => {
-    const val = el.target.value
-    selectStatus.pets = val
-    //console.log(selectStatus)
-    checkSelectStatus()
-
-}
-const petsSelect = document.getElementById('petsSelector');
-petsSelect.addEventListener('change', handlePetsSelect, false)
-
-/*
- * Tratamento das caixas de escolha e disparo da funçao de consulta a API
- */
 
 for (const select of document.querySelectorAll('.custom-select-wrapper')){
    // console.log(select)
@@ -139,7 +129,6 @@ for (const option of document.querySelectorAll(".custom-option")) {
             this.parentNode.querySelector('.custom-option.selected').classList.remove('selected');
             this.classList.add('selected');
             this.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = this.textContent;
-            //this.parentNode.parentNode.firstChild.nextSibling.classList.toggle('trigger_open')
 
         }
         const tipoSelect = this.parentNode.parentNode.parentNode.parentNode.dataset.value
@@ -158,3 +147,6 @@ window.addEventListener('click', function (e) {
     }
 
 });
+/****************************************************************
+ FIM // Tratamento das caixas de escolha e disparo da funçao de consulta a API
+*/
