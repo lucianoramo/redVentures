@@ -54,6 +54,7 @@ const writeData = (plants) => {
         if (id === 0) {
             template.innerHTML = `
             <div class="item item-${id + 1}">
+                <div class="staff-favorite"><p>Staff Favorite</p></div>
                 <div class="imgGrid"><img src="${plant.url}"></div>
                 <h4>${plant.name}</h4>
                 <div class="planta-footer">
