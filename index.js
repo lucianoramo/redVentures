@@ -26,12 +26,12 @@ const writeData2 = (plants) => {
 
 const writeData = (plants) => {
     const container = document.getElementById('div-results')
-    container.innerHTML=""
+    container.innerHTML = ""
     plants.map((plant, id) => {
         var template = document.createElement('template');
         if (id === 0) {
             template.innerHTML = `
-            <div class="item item-${id+1}">
+            <div class="item item-${id + 1}">
                 <div class="imgGrid"><img src="${plant.url}"></div>
                 <h4>${plant.name}</h4>
                 <div class="planta-footer">
@@ -47,7 +47,7 @@ const writeData = (plants) => {
                 </div>`.trim()
             container.appendChild(template.content.firstChild)
         } else {
-            template.innerHTML = `<div class="item item-${id+1}">
+            template.innerHTML = `<div class="item item-${id + 1}">
                 <div class="imgGrid"><img src="${plant.url}"></div>
                 <h4>${plant.name}</h4>
                 <div class="planta-footer">
@@ -118,11 +118,20 @@ const handlePetsSelect = (el) => {
 const petsSelect = document.getElementById('petsSelector');
 petsSelect.addEventListener('change', handlePetsSelect, false)
 
-document.querySelector('.custom-select-wrapper').addEventListener('click', function () {
-    this.querySelector('.custom-select').classList.toggle('open');
-    this.querySelector('.custom-select__trigger').classList.toggle('trigger_open')
-    console.log('foi')
-})
+/*
+ * Tratamento das caixas de escolha e disparo da funçao de consulta a API
+ */
+
+for (const select of document.querySelectorAll('.custom-select-wrapper')){
+   // console.log(select)
+    select.addEventListener('click', function () {
+
+        this.querySelector('.custom-select').classList.toggle('open');
+        this.querySelector('.custom-select__trigger').classList.toggle('trigger_open')
+       
+    })
+}
+
 
 for (const option of document.querySelectorAll(".custom-option")) {
     option.addEventListener('click', function () {
@@ -133,9 +142,11 @@ for (const option of document.querySelectorAll(".custom-option")) {
             //this.parentNode.parentNode.firstChild.nextSibling.classList.toggle('trigger_open')
 
         }
-        
-        console.log(this)
-        
+        const tipoSelect = this.parentNode.parentNode.parentNode.parentNode.dataset.value
+        const selectedValue = this.parentNode.querySelector('.custom-option.selected').dataset.value
+        selectStatus[tipoSelect] = selectedValue
+        checkSelectStatus()
+        console.log(selectStatus)
     })
 }
 window.addEventListener('click', function (e) {
@@ -145,5 +156,5 @@ window.addEventListener('click', function (e) {
         select.classList.remove('open');
         trigger.classList.remove('trigger_open')
     }
-    
+
 });
