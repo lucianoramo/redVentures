@@ -57,7 +57,7 @@ const writeData = (plants) => {
         if (id === 0) {
             template.innerHTML = `
             <div class="item item-${id + 1}">
-                <div class="staff-favorite"><p>Staff Favorite</p></div>
+                <div class="staff-favorite"><p>✨ Staff favorite</p></div>
                 <div class="imgGrid"><img src="${plant.url}"></div>
                 <div class="fav-planta-footer">
                     <div class="fav-planta-name">    
@@ -121,10 +121,11 @@ const checkSelectStatus = () => {
     }
 
 }
-/****************************************************************
- Tratamento das caixas de escolha e disparo da funçao de consulta a API
-*/
-
+/*
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Tratamento das caixas de escolha e disparo da funçao de consulta a API
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*/ 
 
 for (const select of document.querySelectorAll('.custom-select-wrapper')) {
     // console.log(select)
@@ -161,6 +162,8 @@ window.addEventListener('click', function (e) {
     }
 
 });
-/****************************************************************
- FIM // Tratamento das caixas de escolha e disparo da funçao de consulta a API
-*/
+/*
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * FIM // Tratamento das caixas de escolha e disparo da funçao de consulta a API
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*/ 
