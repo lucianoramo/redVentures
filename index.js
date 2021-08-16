@@ -180,9 +180,9 @@ const renderData = (plants) => {
                         <h4>$${plant.price}</h4>
                     </div>
                     <div class="planta-icones">
-                        <div class="planta-icone sun"><img src="./images/icons/low-sun.svg" alt=""></div>
-                        <div class="planta-icone water"><img src="./images/icons/3-drops.svg" alt=""></div>
-                        <div class="planta-icone pets"><img src="./images/icons/pet.svg" alt=""></div>
+                        <div class="planta-icone sun"><img src="./images/icons/${iconsSvgPath.sun}" alt=""></div>
+                        <div class="planta-icone water"><img src="./images/icons/${iconsSvgPath.water}" alt=""></div>
+                        <div class="planta-icone pets"><img src="./images/icons/${iconsSvgPath.toxicity}" alt=""></div>
                     </div>
                 </div>
             </div>`.trim()

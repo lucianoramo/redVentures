@@ -173,6 +173,7 @@ h4 {
     font-size: 16px;
     line-height: 28px;
     font-weight: 700;
+    color: var(--dark-green);
 }
 
 p {
@@ -442,6 +443,7 @@ body {
 
 .planta-preco {
     color: var(--dark-green);
+    
 }
 
 .planta-icones {
@@ -488,7 +490,9 @@ body {
     flex-direction: column;
     justify-content: flex-end;
 }
-
+.item .imgGrid h4{
+    color:var(--dark-green);
+}
 .item-1 {
     padding: 20px;
 
@@ -510,13 +514,14 @@ body {
     .fav-preco-icone {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: space-around;
     }
 
     .fav-preco-icone .planta-preco h4 {
         font-size: 24px;
         line-height: 28px;
-        color: var(--dark-green)
+        color: var(--dark-green);
+        text-align: right;
     }
 
     .planta-icones img {
