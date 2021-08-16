@@ -963,3 +963,8 @@ body {
         }
     }
 }
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+    .destacada-left{
+        background-position-x: calc(((1366px - 100vw) + 10vw) *-1);
+    }
+}
