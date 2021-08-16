@@ -1,26 +1,53 @@
-// ! inserido para evitar um erro no uso de async / await relacionado ao Babel local
+// ! inserted to avoid async / await error related to Babel on local development
 import 'regenerator-runtime/runtime'
 
-//URL base da API
+// * Base URL API 
 const API_BASE_URL = `https://front-br-challenges.web.app/api/v2/green-thumb/?`
 
-//Busca os dados na API conforme escolhas do usuário
+
+/*
+ * * 
+ * Busca os dados na API conforme escolhas do usuário
+ * 
+ * @param {string} sun Option for the sun selection
+ * @param {string} water Option for how much it rains 
+ * @param {string} pets Option for if pets chew plants
+*/ 
 async function fetchApi(sun, water, pets) {
-    //handle status 404
+
+    // * carrega inicializa o loading
     handleLoading('start')
+
+    //* busca os dados na API
     let response = await fetch(`${API_BASE_URL}sun=${sun}&water=${water}&pets=${pets}`);
+
+    // * handle status e exibe o chama a funcao para escrever os dados
     if (response.status === 200) {
         let data = await response.json();
-        console.log(response.status);
-        await writeData(data)
+        //console.log(response.status);
+        await renderData(data) //* escreve os dados no Grid
     } else {
-        console.log("sem resultados para essa combinação")
-        handleLoading('no-results')
+        //console.log("sem resultados para essa combinação")
+        handleLoading('no-results') //* carrega a seção de nenhum resultado
         cleanResults()
 
     }
+} //* fim fetchApi()
+
+//* Inicializa o objeto que contem as opçoes escolhidas em cada combo
+let selectStatus = {
+    sun: "",
+    water: "",
+    pets: ""
 }
 
+/*
+ * * 
+ * Administra o que precisa aparecer e desaparecer na tela.
+ * 
+ * @param {string} modo determina de vai iniciar(start), terminou(finished) ou 
+ * se retornou nenhum resultado (no-result)
+*/ 
 const handleLoading = (modo) => {
     const loadingDiv = document.getElementById('loading')
     const noResultsDiv = document.getElementById('no-results')
@@ -32,28 +59,41 @@ const handleLoading = (modo) => {
             noResultsDiv.style.display = 'none'
             break
         case 'finished':
-            loading.style.display = 'none'
+            loadingDiv.style.display = 'none'
             noResultsDiv.style.display = 'none'
             break
         case 'no-results':
             results.style.display = 'none'
-            loading.style.display = 'none'
+            loadingDiv.style.display = 'none'
             noResultsDiv.style.display = 'block'
             break
         default:
             break;
     }
 
-}
+} //* Fim handleLoading()
 
-const writeData = (plants) => {
+/*
+ * * 
+ * Renderiza o grid de reultados da busca
+ * 
+ * @param {object} plants Objeto com as plantas que atendem os critérios da busca
+*/
+
+const renderData = (plants) => {
 
     handleLoading('finished')
+
+    //* Limpa a DIV de resultados para iniciar a escrita
     const container = document.getElementById('div-results')
     container.innerHTML = `<div id="loading" style="display:none;"><div class="lds-ellipsis">
     <div></div><div></div><div></div><div></div></div></div>`
+
+    //* percorre o objeto com as plantas e preenche o template do Grid
     plants.map((plant, id) => {
         var template = document.createElement('template');
+
+        //* Se é o elemento featured o template é diferente
         if (id === 0) {
             template.innerHTML = `
             <div class="item item-${id + 1}">
@@ -77,6 +117,8 @@ const writeData = (plants) => {
                 </div>
             </div>`.trim()
             container.appendChild(template.content.firstChild)
+
+        //* Para os demais itens o template é o mesmo
         } else {
             template.innerHTML = `
             <div class="item item-${id + 1}">
@@ -98,28 +140,21 @@ const writeData = (plants) => {
     })
 
 }
-
+//* Limpa o dados da DIV de resutados 
 const cleanResults = () => {
     const container = document.getElementById('div-results')
     container.innerHTML = `<div id="loading" style="display:none;"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>`
-    console.log("clean")
+    //console.log("clean")
 }
-let selectStatus = {
-    sun: "",
-    water: "",
-    pets: ""
-}
+
+//* checa se todos os 3 select boxes foram selecionados e dispara a funçao de buscar dados na API
 const checkSelectStatus = () => {
     if (selectStatus.sun !== "" && selectStatus.water !== "" && selectStatus.pets !== "") {
-        console.log(`rodar funcao: ${selectStatus.sun} ${selectStatus.water} ${selectStatus.pets}`)
+        //console.log(`rodar funcao: ${selectStatus.sun} ${selectStatus.water} ${selectStatus.pets}`)
         cleanResults()
         fetchApi(selectStatus.sun, selectStatus.water, selectStatus.pets)
 
-    } else {
-        console.log("nada")
-
-    }
-
+    } 
 }
 /*
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
